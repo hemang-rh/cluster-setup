@@ -1,0 +1,14 @@
+- name: Cluster setup playbook
+  hosts: localhost
+  tasks:
+    - name: Configure Banner
+      kubernetes.core.k8s:
+        definition: "{{ lookup('kubernetes.core.kustomize', dir='components/branding') }}"
+
+    - name: Configure ConsoleLink
+      kubernetes.core.k8s:
+        definition: "{{ lookup('kubernetes.core.kustomize', dir='components/console-link') }}"
+
+    - name: Install ArgoCD
+      kubernetes.core.k8s:
+        definition: "{{ lookup('kubernetes.core.kustomize', dir='components/argocd') }}"
